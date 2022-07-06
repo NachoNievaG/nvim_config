@@ -8,6 +8,11 @@ if not snip_status_ok then
   return
 end
 
+local pairs_status_ok, pairs = pcall(require, "nvim-autopairs.completion.cmp")
+if not pairs_status_ok then
+  return
+end
+
 require("luasnip/loaders/from_vscode").lazy_load()
 
 local check_backspace = function()
@@ -127,3 +132,4 @@ cmp.setup {
     native_menu = false,
   },
 }
+cmp.event:on('confirm_done',pairs.on_confirm_done())
