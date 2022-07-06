@@ -113,6 +113,11 @@ return packer.startup(function(use)
       require('gitsigns').setup()
     end
   }
+
+  -- Buffer 
+  use "akinsho/bufferline.nvim"
+  use "moll/vim-bbye"
+
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end

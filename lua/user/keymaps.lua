@@ -88,3 +88,9 @@ keymap("n", "<leader>xx", "<cmd>Trouble lsp_references<cr>",opts)
 -- Telescope
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", opts)
+
+-- Buffers
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<leader>c", ":Bdelete!<CR>", opts)
+
