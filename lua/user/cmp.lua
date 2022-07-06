@@ -109,6 +109,7 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = "nvim_lsp"},
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
@@ -126,4 +127,3 @@ cmp.setup {
     native_menu = false,
   },
 }
-

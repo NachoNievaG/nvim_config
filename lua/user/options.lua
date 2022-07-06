@@ -1,5 +1,4 @@
 o = vim.opt
-
 o.backup = false                          
 o.clipboard = "unnamedplus"               
 o.cmdheight = 2                           
