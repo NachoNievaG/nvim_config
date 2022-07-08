@@ -68,6 +68,7 @@ return packer.startup(function(use)
   -- LSP
   use "neovim/nvim-lspconfig"
   use "williamboman/nvim-lsp-installer"
+  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
   -- Inline diagnostics
   use {
@@ -124,10 +125,20 @@ return packer.startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
-  use {"akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
-      require("toggleterm").setup()
-    end
+  -- Term
+  use {"akinsho/toggleterm.nvim", tag = 'v1.*'}
+
+  -- blankline
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+      config =function ()
+        require("indent_blankline").setup {
+          show_current_context = true,
+          show_current_context_start = true,
+        }
+      end
   }
+  use "folke/which-key.nvim"
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
