@@ -87,6 +87,7 @@ local mappings = {
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+  ["N"] = { "<cmd>tabnew<cr>", "New Buffer" },
 
   f = {
     name = "Telescope",
@@ -180,6 +181,25 @@ local mappings = {
     f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+  },
+
+  x = {
+    name = "Debugger",
+    b = { function() require("dap").toggle_breakpoint() end, "Toggle Breakpoint" },
+    B = { function() require("dap").clear_breakpoints() end, "Clear Breakpoints" },
+    c = { function() require("dap").continue() end, "Continue" },
+    i = { function() require("dap").step_into() end, "Step Into" },
+    g = { function() require("dap-go").debug_test() end, "Debug Go Test" },
+    l = { function() require("dapui").float_element "breakpoints" end, "List Breakpoints" },
+    o = { function() require("dap").step_over() end, "Step Over" },
+    q = { function() require("dap").close() end, "Close Session" },
+    Q = { function() require("dap").terminate() end, "Terminate" },
+    r = { function() require("dap").repl.toggle() end, "REPL" },
+    s = { function() require("dapui").float_element "scopes" end, "Scopes" },
+    t = { function() require("dapui").float_element "stacks" end, "Threads" },
+    u = { function() require("dapui").toggle() end, "Toggle Debugger UI" },
+    w = { function() require("dapui").float_element "watches" end, "Watches" },
+    x = { function() require("dap.ui.widgets").hover() end, "Inspect" },
   },
 }
 

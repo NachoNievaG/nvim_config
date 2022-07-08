@@ -138,7 +138,21 @@ return packer.startup(function(use)
         }
       end
   }
+  -- which-key
   use "folke/which-key.nvim"
+
+  -- DAP
+  use 'mfussenegger/nvim-dap'
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"},
+    config =function ()
+      require("dapui").setup()
+    end
+  }
+  use {'leoluz/nvim-dap-go',
+    config =function ()
+      require("dap-go").setup()
+    end
+  }
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
