@@ -1,7 +1,7 @@
 o = vim.opt
 o.backup = false                          
 o.clipboard = "unnamedplus"               
-o.cmdheight = 2                           
+o.cmdheight = 1                           
 o.completeopt = { "menuone", "noselect" } 
 o.conceallevel = 0                        
 o.fileencoding = "utf-8"                  
