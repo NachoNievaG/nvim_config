@@ -44,7 +44,8 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }) -- Markdown visualizer
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }) -- Markdown visualizer
 
   -- Colorscheme
   use({
@@ -72,11 +73,11 @@ return packer.startup(function(use)
 
   -- Inline diagnostics
   use {
-  "folke/trouble.nvim",
-  requires = "kyazdani42/nvim-web-devicons",
-  config = function()
-    require("trouble").setup {}
-  end
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {}
+    end
   }
 
   -- Telescope
@@ -104,7 +105,7 @@ return packer.startup(function(use)
   -- Pairs
   use {
     "windwp/nvim-autopairs",
-      config = function() require("nvim-autopairs").setup {} end
+    config = function() require("nvim-autopairs").setup {} end
   }
 
   -- GitSigns
@@ -115,7 +116,7 @@ return packer.startup(function(use)
     end
   }
 
-  -- Buffer 
+  -- Buffer
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
 
@@ -126,30 +127,30 @@ return packer.startup(function(use)
   }
 
   -- Term
-  use {"akinsho/toggleterm.nvim", tag = 'v1.*'}
+  use { "akinsho/toggleterm.nvim", tag = 'v1.*' }
 
   -- blankline
   use {
     "lukas-reineke/indent-blankline.nvim",
-      config =function ()
-        require("indent_blankline").setup {
-          show_current_context = true,
-          show_current_context_start = true,
-        }
-      end
+    config = function()
+      require("indent_blankline").setup {
+        show_current_context = true,
+        show_current_context_start = true,
+      }
+    end
   }
   -- which-key
   use "folke/which-key.nvim"
 
   -- DAP
   use 'mfussenegger/nvim-dap'
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"},
-    config =function ()
+  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" },
+    config = function()
       require("dapui").setup()
     end
   }
-  use {'leoluz/nvim-dap-go',
-    config =function ()
+  use { 'leoluz/nvim-dap-go',
+    config = function()
       require("dap-go").setup()
     end
   }
