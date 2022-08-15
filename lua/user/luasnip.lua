@@ -98,3 +98,21 @@ ls.add_snippets(nil, {
       }))
   }
 })
+
+
+-- IMPLEMENT This
+
+local ts_locals = require "nvim-treesitter.locals"
+local ts_utils = require "nvim-treesitter.ts_utils"
+
+local get_node_text = vim.treesitter.get_node_text
+
+vim.treesitter.set_query(
+  "go",
+  "LuaSnip_Result",
+  [[ [
+    (method_declaration result: (_) @id)
+    (function_declaration result: (_) @id)
+    (func_literal result: (_) @id)
+  ] ]]
+)
