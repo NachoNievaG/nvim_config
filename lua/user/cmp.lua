@@ -13,7 +13,6 @@ if not pairs_status_ok then
   return
 end
 
-require("luasnip/loaders/from_vscode").lazy_load()
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
@@ -58,7 +57,7 @@ cmp.setup {
   },
   mapping = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -114,8 +113,8 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = "nvim_lsp"},
     { name = "luasnip" },
+    { name = "nvim_lsp" },
     { name = "buffer" },
     { name = "path" },
   },
@@ -124,12 +123,12 @@ cmp.setup {
     select = false,
   },
   window = {
-         completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-   },
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
   experimental = {
     ghost_text = false,
     native_menu = false,
   },
 }
-cmp.event:on('confirm_done',pairs.on_confirm_done())
+cmp.event:on('confirm_done', pairs.on_confirm_done())
