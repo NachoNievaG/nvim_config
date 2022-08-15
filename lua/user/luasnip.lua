@@ -72,7 +72,19 @@ ls.add_snippets(nil, {
   },
   go = {
     s("main", fmt("func main() {{\n\t{}\n}}", i(1))),
-    s("func", fmt("func {}() {{\n\t{}\n}}", { i(1), i(2) }))
+    s("func", fmt(
+      [[
+      func {}({}) {}{{
+        {}
+      }}
+    ]] ,
+      { i(1), i(2), i(3), i(4) })),
+    s("test", fmt(
+      [[
+      func Test{}(t *testing.T) {{
+        {}
+      }}
+    ]] , { i(1), i(2) }))
   },
   lua = {
     s(
