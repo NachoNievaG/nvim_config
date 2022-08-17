@@ -62,6 +62,18 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-nvim-lsp" -- lsp completions
   use "hrsh7th/cmp-nvim-lua" -- lua completions
 
+  -- lsp-ui
+  use {
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+      local saga = require("lspsaga")
+
+      saga.init_lsp_saga({
+        -- your configuration
+      })
+    end,
+  }
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
 
@@ -105,6 +117,11 @@ return packer.startup(function(use)
   use {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
+  }
+
+  use {
+    "windwp/nvim-ts-autotag",
+    config = function() require("nvim-ts-autotag").setup {} end
   }
 
   -- GitSigns
@@ -151,6 +168,14 @@ return packer.startup(function(use)
   use { 'leoluz/nvim-dap-go',
     config = function()
       require("dap-go").setup()
+    end
+  }
+
+  -- colorizer
+  use {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
     end
   }
 
