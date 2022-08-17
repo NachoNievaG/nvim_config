@@ -78,12 +78,12 @@ keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Trouble --
-keymap("n", "<leader>xx", "<cmd>Trouble<cr>",opts)
-keymap("n", "<leader>xx", "<cmd>Trouble workspace_diagnostics<cr>",opts)
-keymap("n", "<leader>xx", "<cmd>Trouble document_diagnostics<cr>",opts)
-keymap("n", "<leader>xx", "<cmd>Trouble loclist<cr>",opts)
-keymap("n", "<leader>xx", "<cmd>Trouble quickfix<cr>",opts)
-keymap("n", "<leader>xx", "<cmd>Trouble lsp_references<cr>",opts)
+keymap("n", "<leader>xx", "<cmd>Trouble<cr>", opts)
+keymap("n", "<leader>xx", "<cmd>Trouble workspace_diagnostics<cr>", opts)
+keymap("n", "<leader>xx", "<cmd>Trouble document_diagnostics<cr>", opts)
+keymap("n", "<leader>xx", "<cmd>Trouble loclist<cr>", opts)
+keymap("n", "<leader>xx", "<cmd>Trouble quickfix<cr>", opts)
+keymap("n", "<leader>xx", "<cmd>Trouble lsp_references<cr>", opts)
 
 -- Telescope
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
@@ -93,4 +93,3 @@ keymap("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<leader>c", ":Bdelete!<CR>", opts)
-
