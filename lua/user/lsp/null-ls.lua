@@ -18,11 +18,8 @@ null_ls.setup {
     formatting.stylua,
   },
   on_attach = function(client, bufnr)
-    if client.name == "tsserver" then
-      client.server_capabilities.document_formatting = false -- 0.7 and earlier
-    end
-    if client.name == "sumneko_lua" then
-      client.server_capabilities.document_formatting = false -- 0.7 and earlier
+    if client.name == "tsserver" or client.name == "sumneko_lua" then
+      client.server_capabilities.document_formatting = false
     end
 
     if client.supports_method("textDocument/formatting") then

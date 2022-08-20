@@ -2,7 +2,7 @@ local ok, ts = pcall(require, "nvim-treesitter.configs")
 if not ok then return end
 require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "go", "lua", "rust", "typescript", "tsx", "json", "css" },
+  ensure_installed = { "go", "lua", "rust", "typescript", "tsx", "json", "css", "rust" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = true,

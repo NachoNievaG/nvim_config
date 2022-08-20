@@ -22,8 +22,8 @@ lsp_installer.on_server_ready(function(server)
   end
 
   if server.name == "sumneko_lua" then
-    local sumneko_opts = require("user.lsp.settings.sumneko_lua")
-    opts               = vim.tbl_deep_extend("force", sumneko_opts, opts)
+    local sumneko_opts                                     = require("user.lsp.settings.sumneko_lua")
+    opts                                                   = vim.tbl_deep_extend("force", sumneko_opts, opts)
   end
 
   if server.name == "pyright" then
