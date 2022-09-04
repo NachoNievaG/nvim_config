@@ -178,6 +178,16 @@ return packer.startup(function(use)
       require("colorizer").setup()
     end
   }
+  -- Lua
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup()
+    end
+  }
+
+  use "rafamadriz/friendly-snippets"
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
