@@ -17,6 +17,18 @@ local test_function_query_string = [[
 )
 ]]
 
+local function isEmpty(s)
+  return s == nil or s == ''
+end
+
+local function handleTableTest(s)
+  local fatherName = string.match(s, "(.+)[/]")
+  if not isEmpty(fatherName) then
+    return fatherName
+  end
+  return s
+end
+
 local find_test_line = function(go_bufnr, name)
   local formatted = string.format(test_function_query_string, name)
   local query = vim.treesitter.parse_query("go", formatted)
@@ -41,7 +53,7 @@ end
 local add_golang_test = function(state, entry)
   state.tests[make_key(entry)] = {
     name = entry.Test,
-    line = find_test_line(state.bufnr, entry.Test),
+    line = find_test_line(state.bufnr, handleTableTest(entry.Test)),
     output = {},
   }
 end
@@ -109,10 +121,12 @@ local attach_to_buffer = function(bufnr, command)
 
               local test = state.tests[make_key(decoded)]
               if test.success then
-                local text = { "✓" }
-                vim.api.nvim_buf_set_extmark(bufnr, ns, test.line, 0, {
-                  virt_text = { text },
-                })
+                if test.line then
+                  local text = { "✓" }
+                  vim.api.nvim_buf_set_extmark(bufnr, ns, test.line, 0, {
+                    virt_text = { text },
+                  })
+                end
               end
             elseif decoded.Action == "pause" or decoded.Action == "cont" then
               -- Do nothing
@@ -148,5 +162,6 @@ local attach_to_buffer = function(bufnr, command)
 end
 
 vim.api.nvim_create_user_command("GoTestOnSave", function()
-  attach_to_buffer(vim.api.nvim_get_current_buf(), { "go", "test", "./...", "-v", "-json", "-failfast" })
+  local route = "./" .. string.match(vim.fn.expand('%'), "(.+/)") .. "..."
+  attach_to_buffer(vim.api.nvim_get_current_buf(), { "go", "test", "-v", "-json", "-failfast", route })
 end, {})
