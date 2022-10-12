@@ -142,7 +142,7 @@ return packer.startup(function(use)
   }
 
   -- Term
-  use { "akinsho/toggleterm.nvim", tag = 'v1.*' }
+  use { "akinsho/toggleterm.nvim", tag = '*' }
 
   -- blankline
   use {
