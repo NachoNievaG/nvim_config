@@ -48,11 +48,22 @@ return packer.startup(function(use)
   use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
     setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
   -- Colorscheme
-  use({
+  use {
     "catppuccin/nvim",
-    as = "catppuccin"
-  })
-
+    as = "catppuccin",
+    config = function()
+      require("catppuccin").setup {
+        flavour = "macchiato" -- mocha, macchiato, frappe, latte
+      }
+      --vim.api.nvim_command "colorscheme catppuccin"
+    end
+  }
+  use {
+    "rebelot/kanagawa.nvim",
+    config = function()
+      vim.cmd("colorscheme kanagawa")
+    end
+  }
   -- CMP
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -131,15 +142,8 @@ return packer.startup(function(use)
     end
   }
 
-  -- Buffer
-  use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
 
-  -- LuaLine
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
 
   -- Term
   use { "akinsho/toggleterm.nvim", tag = '*' }
@@ -185,29 +189,18 @@ return packer.startup(function(use)
       require("todo-comments").setup()
     end
   }
-  use {
-    "xiyaowong/nvim-transparent",
-    require("transparent").setup({
-      enable = true, -- boolean: enable transparent
-      extra_groups = { -- table/string: additional groups that should be cleared
-        {
-          "all",
-          "nvim-tree",
-          "BufferLineTabClose",
-          "BufferlineBufferSelected",
-          "BufferLineFill",
-          "BufferLineBackground",
-          "BufferLineSeparator",
-          "BufferLineIndicatorSelected",
-        }
-      },
-      exclude = {}, -- table: groups you don't want to clear
-    })
-  }
-
   use "rafamadriz/friendly-snippets"
 
   use "folke/lua-dev.nvim"
+
+  use {
+    "nachonievag/go-tester.nvim",
+    requires = "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("go-tester").setup({ flags = { "-failfast", "-race", "-cover" } })
+    end
+  }
+  use "rebelot/heirline.nvim"
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
