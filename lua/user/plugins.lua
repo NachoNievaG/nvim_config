@@ -107,13 +107,13 @@ return packer.startup(function(use)
 
   -- Tree
   use {
-    'kyazdani42/nvim-tree.lua',
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
     requires = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icons
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
     },
-    config = function()
-      require("nvim-tree").setup {}
-    end
   }
 
   -- Treesitter
@@ -201,6 +201,19 @@ return packer.startup(function(use)
     end
   }
   use "rebelot/heirline.nvim"
+
+  use {
+    "xiyaowong/nvim-transparent",
+    config = function()
+      require("transparent").setup({
+        enable = true, -- boolean: enable transparent
+        extra_groups = { -- table/string: additional groups that should be cleared
+          "all",
+        },
+        exclude = {}, -- table: groups you don't want to clear
+      })
+    end
+  }
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

@@ -79,7 +79,7 @@ local opts = {
 }
 
 local mappings = {
-  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  ["e"] = { "<cmd>Neotree toggle reveal<cr>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q<CR>", "Quit" },
   ["W"] = { "<cmd>wq!<CR>", "Save & quit" },
@@ -96,9 +96,9 @@ local mappings = {
       "Find files",
     },
     w = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-    h = { "<cmd>Telescope help_tags theme=ivy<cr>", "Find Text" },
-    d = { "<cmd>Telescope diagnostics <cr>", "Find Text" },
-    p = { "<cmd>TodoTelescope keywords=TODO,FIX <cr>", "Find Text" },
+    h = { "<cmd>Telescope help_tags theme=ivy<cr>", "Find Help" },
+    d = { "<cmd>Telescope diagnostics <cr>", "Find Diagnostics" },
+    p = { "<cmd>TodoTelescope keywords=TODO,FIX <cr>", "Find Pendings" },
   },
 
 

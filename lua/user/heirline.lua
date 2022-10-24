@@ -130,24 +130,6 @@ local FileName = {
   end,
   hl = { fg = "#7E9CD8" },
 }
-
-local FileFlags = {
-  {
-    condition = function()
-      return vim.bo.modified
-    end,
-    provider = "[+]",
-    hl = { fg = "green" },
-  },
-  {
-    condition = function()
-      return not vim.bo.modifiable or vim.bo.readonly
-    end,
-    provider = "",
-    hl = { fg = "orange" },
-  },
-}
-
 -- Now, let's say that we want the filename color to change if the buffer is
 -- modified. Of course, we could do that directly using the FileName.hl field,
 -- but we'll see how easy it is to alter existing components using a "modifier"
@@ -308,7 +290,7 @@ local LSPActive = {
   -- Or complicate things a bit and get the servers names
   provider = function()
     local names = {}
-    for i, server in pairs(vim.lsp.buf_get_clients(0)) do
+    for _, server in pairs(vim.lsp.buf_get_clients(0)) do
       table.insert(names, server.name)
     end
     return " [" .. table.concat(names, " ") .. "]"
@@ -327,8 +309,8 @@ local TabLineOffset = {
     local bufnr = vim.api.nvim_win_get_buf(win)
     self.winid = win
 
-    if vim.bo[bufnr].filetype == "NvimTree" then
-      self.title = "NvimTree"
+    if vim.bo[bufnr].filetype == "neo-tree" then
+      self.title = "neo-tree"
       return true
       -- elseif vim.bo[bufnr].filetype == "TagBar" then
       --     ...
@@ -470,43 +452,26 @@ local BufferLine = utils.make_buflist(
 -- by the way, open a lot of buffers and try clicking them ;)
 )
 
-local Tabpage = {
-  provider = function(self)
-    return "%" .. self.tabnr .. "T " .. self.tabnr .. " %T"
-  end,
-  hl = function(self)
-    if not self.is_active then
-      return "TabLine"
-    else
-      return "TabLineSel"
-    end
-  end,
-}
 
-local TabpageClose = {
-  provider = "%999X  %X",
-  hl = "TabLine",
-}
 
-local TabPages = {
-  -- only show this component if there's 2 or more tabpages
+
+local TabLine = { TabLineOffset, BufferLine }
+
+local StatusCond = {
   condition = function()
-    return #vim.api.nvim_list_tabpages() >= 2
+    return conditions.buffer_matches({
+      buftype = { "nofile", "help", "quickfix" },
+      filetype = { "^git.*", "fugitive" },
+    })
   end,
-  { provider = "%=" },
-  utils.make_tablist(Tabpage),
-  TabpageClose,
+  provider = " ",
 }
-
-
-local TabLine = { TabLineOffset, BufferLine, TabPages }
-
-local StatusLine = {
+local StatusLine = { StatusCond,
   ViMode, Space, Git, Space, LSPActive, Space, Diagnostics, Align,
   FileNameBlock, Align,
   Ruler, Space, ScrollBar, Space
 }
 
 -- Yep, with heirline we're driving manual!
+require('heirline').setup(StatusLine, {}, TabLine)
 vim.cmd([[au FileType * if index(['wipe', 'delete'], &bufhidden) >= 0 | set nobuflisted | endif]])
-require('heirline').setup(StatusLine, TabLine)
