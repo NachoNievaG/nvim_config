@@ -31,8 +31,15 @@ lsp_installer.on_server_ready(function(server)
     opts = vim.tbl_deep_extend("force", pyright_opts, opts)
   end
 
-  -- This setup() function is exactly the same as lspconfig's setup function.
-  -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+  if server.name == "gopls" then
+    local gopls = require("user.lsp.settings.gopls")
+    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+      pattern = { "*.go" },
+      callback = function()
+        gopls.go_org_import(3000)
+      end
+    })
+  end
   server:setup(opts)
 end)
 
