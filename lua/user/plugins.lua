@@ -49,16 +49,6 @@ return packer.startup(function(use)
     setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
   -- Colorscheme
   use {
-    "catppuccin/nvim",
-    as = "catppuccin",
-    config = function()
-      require("catppuccin").setup {
-        flavour = "macchiato" -- mocha, macchiato, frappe, latte
-      }
-      --vim.api.nvim_command "colorscheme catppuccin"
-    end
-  }
-  use {
     "rebelot/kanagawa.nvim",
     config = function()
       vim.cmd("colorscheme kanagawa")

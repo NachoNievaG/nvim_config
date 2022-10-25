@@ -460,11 +460,11 @@ local TabLine = { TabLineOffset, BufferLine }
 local StatusCond = {
   condition = function()
     return conditions.buffer_matches({
-      buftype = { "nofile", "help", "quickfix" },
-      filetype = { "^git.*", "fugitive" },
+      buftype = { "nofile", "help", "quickfix", "neo-tree" },
+      filetype = { "^git.*", "fugitive", "neo-tree" },
     })
   end,
-  provider = " ",
+  { provider = " " },
 }
 local StatusLine = { StatusCond,
   ViMode, Space, Git, Space, LSPActive, Space, Diagnostics, Align,
